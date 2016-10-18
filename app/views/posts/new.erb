@@ -1,0 +1,19 @@
+<% if logged_in? %>
+  <h4>Create a new post</h4>
+
+  <%= erb :'/_errors', layout: false, locals: {errors: @errors} %>
+  <form action="/posts" method="POST">
+    <label for='title'> Title: </label><br>
+      <input type="text" name="title" ><br>
+    <label for='description'> Description: </label><br>
+      <input type="text" name="content" ><br>
+    <input type="submit" value="Submit your post">
+  </form>
+
+  <% else %>
+
+  <%= erb :'/_errors', layout: false, locals: {errors: @errors} %>
+
+  <h4>You must be logged in to create a new post.</h4>
+<% end %>
+

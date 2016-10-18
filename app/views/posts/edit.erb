@@ -1,0 +1,11 @@
+<h3> Edit your Post: </h3>
+<%= erb :'/_errors', layout: false, locals: {errors: @errors} %>
+<form action="/posts/<%= @post.id %>" method="POST">
+  <input type='hidden' name='_method' value='PUT'>
+  <label for='title'> Post Title: </label><br>
+    <input type="text" name="title" value ='<%= @post.title %>'><br>
+  <label for='description'> Content: </label><br>
+    <input type="text" name="content" value ='<%= @post.content %>'><br>
+    <input type='hidden' name='author_id' value ='<%= @post.author_id %> '><br>
+  <input type="submit" value="Edit Your Post">
+</form>

@@ -1,0 +1,42 @@
+<% if logged_in? %>
+  <% if @user.id == current_user.id %>
+    <h1>Profile Page</h1>
+    <ul>
+      <% if @user.posts %>
+        <h3>Your Posts</h3>
+        <% @user.posts.each do |post| %>
+          <li> <%= post.title %></li>
+          <ul>
+            <% if post.comments %>
+              <% post.comments.each do |comment| %>
+                <li> <%= comment.user.username %> wrote... </li>
+                <li> <%= comment.content %> </li><br>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    </ul>
+
+
+    <ul>
+      <% if @user.comments %>
+        <h3>Posts you have commented on:</h3>
+          <% @user.comments.each do |comment| %>
+            <h3>Post Title:<%= comment.post.title %></h3>
+            <h5>Post Content:<%= comment.post.content %></h5>
+              <ul>
+                <% comment.sibiling_comments.each do |sib_comment| %>
+                    <% if sib_comment.user.id == current_user.id %>
+                      <li ><b>Your Comment: <%= sib_comment.content  %></b></li>
+                      <% else %>
+
+                        <li><%= sib_comment.content  %></li>
+                    <% end %>
+                <% end %>
+              </ul>
+          <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
