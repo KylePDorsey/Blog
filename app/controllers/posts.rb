@@ -15,11 +15,13 @@ end
 
 get '/posts/:id/edit' do
   @post = Post.find_by(id: params[:id])
-  if owner?(@post.user)
+  if @post
+    if owner?(@post.user)
     erb :'/posts/edit'
+    end
   else
     @errors = ["You must be the author of the post to edit it"]
-    redirect '/'
+    erb :'/_404'
   end
 end
 
@@ -49,9 +51,8 @@ get '/posts/:id' do
   if @post
     erb :'/posts/show'
   else
-    @posts = Post.all
     @errors = ["Post not found"]
-    erb :'/posts/index'
+    erb :'/_404'
   end
 end
 
