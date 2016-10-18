@@ -1,0 +1,18 @@
+<% if @post %>
+  <h3> <%= @post.title  %> </h3>
+  <p>Author: <%= @post.user.username %> </p>
+  <p>Post Content: <%= @post.content %> </p>
+  <ul>
+    <% if @post.comments %>
+     <h5>Comments</h5>
+      <% @post.comments.each do |comment| %>
+        <li> <%= comment.user.username %>, Said... </li>
+        <ul>
+          <li> <%= comment.content %></li><br>
+        </ul>
+       <% end %>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>No post info!</p>
+<% end %>

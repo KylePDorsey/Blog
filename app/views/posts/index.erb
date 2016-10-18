@@ -1,0 +1,25 @@
+<h4>Welcome to Kyle Knightly News</h4>
+
+
+<%= erb :'/_errors', layout: false, locals: {errors: @errors} %>
+<ol>
+<% if @posts %>
+  <% @posts.each do |post| %>
+    <li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
+      <% if owner?(post.user) %>
+        <form action="/posts/<%= post.id %>" method='POST'>
+          <input type='hidden' name='_method' value='DELETE'>
+          <input type="submit" value="Delete">
+        </form>
+        <form action="/posts/<%= post.id %>/edit" method='get'>
+          <input type="submit" value="Edit Post">
+        </form>
+      <% end %>
+    <ul>
+      <li>Points: <%= rand(100) %> (add logic for this later)</li>
+      <li>Author: <%= post.user.username %> </li>
+      <li>Comments: <%= post.comments.count %> </li>
+    </ul>
+  <% end  %>
+<% end %>
+</ol>
